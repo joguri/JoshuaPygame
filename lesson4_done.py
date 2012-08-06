@@ -2,20 +2,22 @@ import pygame , sys
 
 screen = pygame.display.set_mode( (800,600) )
 
-background = pygame.image.load("Sky.png")
-backgroundRect = background.get_rect()
 
-screen.blit(background,backgroundRect)
+class Character(Item):
+	def move(self, x,y):
+		self.rec.move_ip( [x,y] )
 
 pygame.key.set_repeat(200, 1)
 
 
-person = pygame.image.load("MR_bob.png")
-personRect = person.get_rect()
 
-screen.blit(person,personRect)
+bgItem = Item("Sky.png")
+bgItem.update(screen)
 
+pygame.key.set_repeat(1, 1)
 
+bob = Character("MR_bob.png")
+bob.update(screen)
 
 pygame.display.flip()
 
@@ -27,9 +29,8 @@ def Moveit():
 		i = i + 1
 
 def processTick():
-
-	screen.blit(background,backgroundRect)
-	screen.blit(person,personRect)
+	bgItem.update(screen)
+	bob.update(screen)
 	pygame.display.flip()
 
 while 1==1:
@@ -39,16 +40,16 @@ while 1==1:
 		if event.type==pygame.QUIT:
 			exit()
 		if event.type==pygame.KEYDOWN and event.key == pygame.K_UP:
-			personRect.move_ip( [0,-20] )
+			bob.move(0,-20);
 			processTick()
 		if event.type==pygame.KEYDOWN and event.key == pygame.K_DOWN:
-			personRect.move_ip( [0,20] )
+			bob.move(0,20);
 			processTick()
 		if event.type==pygame.KEYDOWN and event.key == pygame.K_RIGHT:
-			personRect.move_ip( [20,0] )
+			bob.move(20,0);
 			processTick()
 		if event.type==pygame.KEYDOWN and event.key == pygame.K_LEFT:
-			personRect.move_ip( [-20,0] )
+			bob.move(-20,0);
 			processTick()
 		if event.type==pygame.KEYDOWN and event.key == pygame.K_SPACE:
 			Moveit()
@@ -56,7 +57,6 @@ while 1==1:
 	
 
 	pygame.time.delay(100)
-
 
 
 

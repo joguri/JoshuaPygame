@@ -1,17 +1,19 @@
-import pygame , item
+import pygame
+from item import *
 
 screen = pygame.display.set_mode( (800,600) )
 
 pygame.key.set_repeat(200, 1)
 		
-bg=item.Item("Sky.png")
+bg=Item("Sky.png")
 bg.update(screen)
 
-bob = item.Item("MR_bob.png")
+bob = Item("MR_bob.png")
 bob.place(300, 250)
 bob.update(screen)
+bob.container=bg
 
-wall = item.Item("Blocking_cloud.png")
+wall = Item("Blocking_cloud.png")
 
 pygame.display.flip()
 
@@ -34,22 +36,19 @@ while 1==1:
 		if event.type==pygame.QUIT:
 			exit()
 		if event.type==pygame.KEYDOWN and event.key == pygame.K_UP:
-			bob.moveIn(bg, 0,-3 )
-			processTick()
+			bob.ySpeed-=1
 		if event.type==pygame.KEYDOWN and event.key == pygame.K_DOWN:
-			bob.moveIn(bg, 0,3 )
-			processTick()
+			bob.ySpeed+=1
 		if event.type==pygame.KEYDOWN and event.key == pygame.K_RIGHT:
-			bob.moveIn(bg, 3,0 )
-			processTick()
+			bob.xSpeed+=1
 		if event.type==pygame.KEYDOWN and event.key == pygame.K_LEFT:
-			bob.moveIn(bg, -3,0 )
-			processTick()
-
+			bob.xSpeed-=1
+		if event.type==pygame.KEYDOWN and event.key == pygame.K_SPACE:
+			bob.jump()
 		if event.type==pygame.MOUSEBUTTONDOWN:
 			mouseClicked()
 		
-
+	processTick()
 	pygame.time.delay(10)
 
 	

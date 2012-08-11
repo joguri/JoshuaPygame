@@ -8,10 +8,15 @@ pygame.key.set_repeat(200, 1)
 bg=Item("Sky.png")
 bg.update(screen)
 
-bob = Item("MR_bob.png")
+bob = Character("MR_bob.png")
 bob.place(300, 250)
 bob.update(screen)
 bob.container=bg
+
+sheller = Character("skeleton.png")
+sheller.place(400, 400)
+sheller.update(screen)
+sheller.container=bg
 
 wall = Item("Blocking_cloud.png")
 
@@ -20,6 +25,7 @@ pygame.display.flip()
 def processTick():
 	bg.update(screen)
 	wall.update(screen)
+	sheller.update(screen)
 	bob.update(screen)
 	pygame.display.flip()
 
@@ -47,6 +53,8 @@ while 1==1:
 			bob.jump()
 		if event.type==pygame.MOUSEBUTTONDOWN:
 			mouseClicked()
+		if event.type==pygame.KEYDOWN and event.key == pygame.K_v:
+			bob.visible=False
 		
 	processTick()
 	pygame.time.delay(10)

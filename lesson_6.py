@@ -13,10 +13,13 @@ bob.place(300, 250)
 bob.update(screen)
 bob.container=bg
 
-sheller = Character("skeleton.png")
+music.play()
+
+sheller = Character("sheller.png")
 sheller.place(400, 400)
 sheller.update(screen)
 sheller.container=bg
+bob.enemy=sheller
 
 wall = Item("Blocking_cloud.png")
 
@@ -55,6 +58,8 @@ while 1==1:
 			mouseClicked()
 		if event.type==pygame.KEYDOWN and event.key == pygame.K_v:
 			bob.visible=False
+		if event.type==pygame.KEYDOWN and event.key == pygame.K_r:
+			bob.visible=True
 		
 	processTick()
 	pygame.time.delay(10)
